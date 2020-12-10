@@ -10,7 +10,11 @@ import BrowseExercises from './routines/BrowseExercises'
 import Goals from './goals/Goals'
 import Progress from './progress/Progress'
 
+import DragAndDropPlay from './drag_n_drop_play/DragAndDropPlay'
+
+
 function App() {
+  
   return (
     <div className="App">
       <Menu />
@@ -38,6 +42,12 @@ function App() {
         </Route>
         <Route exact path="/browse-exercises">
           <BrowseExercises />
+        </Route>
+        
+
+        
+        <Route exact path="/drag-and-drop-play">
+          <DragAndDropPlay/>
         </Route>
         
       </Switch>
