@@ -10,7 +10,7 @@ const DragAndDropPlay = () => {
 
   const [state, setState] = useState(initialData)
 
-  const onDragEnd = result => {
+  const onDragEnd = (result) => {
     // TODO: reorder column
     const {destination, source, draggableId} = result
 

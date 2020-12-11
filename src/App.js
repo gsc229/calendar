@@ -10,7 +10,7 @@ import Goals from './goals/Goals'
 import Progress from './progress/Progress'
 
 import DragAndDropPlay from './drag_n_drop_play/DragAndDropPlay'
-
+import DragAndDrop2 from './drag_n_drop_play/log_rocket_example/DragAndDrop2'
 
 function App() {
   
@@ -47,6 +47,9 @@ function App() {
         
         <Route exact path="/drag-and-drop-play">
           <DragAndDropPlay/>
+        </Route>
+        <Route exact path="/drag-and-drop-play2">
+          <DragAndDrop2/>
         </Route>
         
       </Switch>

@@ -18,6 +18,7 @@ const Container = styled.div`
 */
 
 const Tasks = ({task, provided, snapshot}) => {
+  console.log({task, provided, snapshot})
   return (
         <div
         className='task'
