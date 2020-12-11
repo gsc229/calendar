@@ -1,4 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.min.css'
 import {Switch, Route} from 'react-router-dom'
 import Calendar from './main_calendar/Calendar'
 import Menu from './menu/Menu'
