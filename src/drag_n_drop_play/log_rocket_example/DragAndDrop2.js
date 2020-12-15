@@ -45,15 +45,37 @@ const onDragEnd = (result, columns, setColumns) => {
   if(source.droppableId !== destination.droppableId){
     // Move the item from the source to the destination in the proper place in the destination
     // items array
-    const sourceColumn = columns.find(column => column.id === source.droppableId)
-    const destinationColumn = columns.find(column => column.id === destination.droppableId)
+    const sourceColumn = columns[source.droppableId]
+    const destinationColumn = columns[destination.droppableId]
     const sourceItems = [...sourceColumn.items]
     const destinationItems = [...destinationColumn.items]
-    sourceItems.splice()
-
+    const [removed] = sourceItems.splice(source.index, 1)
+    destinationItems.splice(destination.index, 0, removed)
+    setColumns({
+      ...columns,
+      [source.droppableId]: {
+        ...sourceColumn,
+        items: sourceItems
+      },
+      [destination.droppableId]: {
+        ...destinationColumn,
+        items: destinationItems
+      }
+    })
 
   } else{
     // Move the item to the new index in the array
+    const column = columns[source.droppableId]
+    const copiedItems = [...column.items]
+    const [removed] = copiedItems.splice(source.index, 1)
+    copiedItems.splice(destination.index, 0, removed)
+    setColumns({
+      ...columns,
+      [source.droppableId]: {
+        ...column,
+        items: copiedItems
+      }
+    })
   }
 
 }
@@ -63,11 +85,11 @@ const DragAndDrop2 = () => {
 
   const [columns, setColumns] = useState(columnsFromBackEnd)
   console.log({columns}, {objeEntries: Object.entries(columns)})
-  
+
   return (
     <div style={{display: 'flex', justifyContent: 'center', height: '100%'}}>
       <DragDropContext
-        onDragEnd={result=> console.log({result})}
+        onDragEnd={result=> onDragEnd(result, columns, setColumns)}
       >
         {Object.entries(columns).map(([id, column]) => {
           
