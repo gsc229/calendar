@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import {DragDropContext, Draggable, Droppable} from 'react-beautiful-dnd'
+
 import uuid from 'uuid/dist/v4'
 
 
@@ -13,19 +14,23 @@ const itemsFromBackend2 = [
   {id: uuid(), content: 'Fourth task'}
 ]
 
-const columnsFromBackEnd = 
-  {
-    [uuid()]:{
+const columnsFromBackEnd = [
+    {
+      
       id: uuid(),
       name: 'Monday',
       items: itemsFromBackend
-    },
-    [uuid()]:{
+    
+  },
+    {
+      
       id: uuid(), 
       name: 'Tuesday',
       items: itemsFromBackend2
-    }
+    
   }
+  ]
+  
 
 console.log({columnsFromBackEnd})
 console.log("object entries columnsFromBackEnd", Object.entries(columnsFromBackEnd))
@@ -81,7 +86,7 @@ const onDragEnd = (result, columns, setColumns) => {
 }
 
 
-const DragAndDrop2 = () => {
+const DragAndDrop2 = ({routines}) => {
 
   const [columns, setColumns] = useState(columnsFromBackEnd)
   console.log({columns}, {objeEntries: Object.entries(columns)})
@@ -91,12 +96,12 @@ const DragAndDrop2 = () => {
       <DragDropContext
         onDragEnd={result=> onDragEnd(result, columns, setColumns)}
       >
-        {Object.entries(columns).map(([id, column]) => {
+        {columns.map((column) => {
           
           return(
             <Droppable
-              key={id}
-              droppableId={id}
+              key={column.id}
+              droppableId={column.id}
             >
               {(provided, snapshot) => {
                 return (

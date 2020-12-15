@@ -1,4 +1,6 @@
+import {useState, useEffect} from 'react'
 import {Switch, Route} from 'react-router-dom'
+import axiosWithAuth from './utils/axiosWithAuth'
 import Calendar from './main_calendar/Calendar'
 import Menu from './menu/Menu'
 import DashBoard from './dashboard/Dashboard'
@@ -14,6 +16,21 @@ import DragAndDrop2 from './drag_n_drop_play/log_rocket_example/DragAndDrop2'
 
 function App() {
   
+  const [routines, setRoutines] = useState([{}])
+  
+  useEffect(()=>{
+    axiosWithAuth()
+    .get('/routines?populate_one=weeks&populate_two=exercises&populate_three=exercise')
+    .then(res=>{
+      console.log({res})
+      setRoutines(res.data.data)
+    })
+    .catch(err=>{
+      console.log({err})
+    })
+  }, [])
+
+
   return (
     <div className="App">
       <Menu />
@@ -49,10 +66,14 @@ function App() {
           <DragAndDropPlay/>
         </Route>
         <Route exact path="/drag-and-drop-play2">
-          <DragAndDrop2/>
+          <DragAndDrop2 routines={routines}/>
         </Route>
         
       </Switch>
+      <div style={{padding: '20px'}}>
+        
+        <pre>{JSON.stringify(routines, '' ,4)}</pre>
+      </div>
     </div>
   );
 }
