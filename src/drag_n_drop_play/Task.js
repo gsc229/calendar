@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import {Draggable} from 'react-beautiful-dnd'
 
 const Container = styled.div`
   border: 1px solid lightgrey;
@@ -18,24 +17,19 @@ const Container = styled.div`
 
 */
 
-const Tasks = ({task, index}) => {
+const Tasks = ({task, provided, snapshot}) => {
+  console.log({task, provided, snapshot})
   return (
-    <Draggable
-      draggableId={task.id}
-      index={index}
-    >
-      {(provided) => (
-        <div 
+        <div
         className='task'
         {...provided.draggableProps}
         {...provided.dragHandleProps}
         ref={provided.innerRef}
+        style={{backgroundColor: snapshot.isDragging ? "lightgreen" : "white"}} 
         >
           <h4>{task.id}</h4>
           <p>{task.content}</p>
         </div>
-      )}
-    </Draggable>
   )
 }
 

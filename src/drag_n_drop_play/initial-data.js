@@ -21,5 +21,5 @@ const initialData = {
   columnOrder: ['column-1']
 
 }
-
+ 
 export default initialData
