@@ -6,7 +6,7 @@ const RoutineExercise = ({routine_exercise}) => {
 
   return (
     <div>
-      <h5>{exercise.name}</h5>
+      <h5 style={{fontSize: '1.5vw'}}>{exercise.name}</h5>
       <p>{day}</p>
     </div>
   )

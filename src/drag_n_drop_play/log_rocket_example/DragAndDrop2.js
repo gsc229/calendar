@@ -27,9 +27,9 @@ const columnsFromBackEnd =
       items: itemsFromBackend2
     }
   }
-
+/* 
 console.log({columnsFromBackEnd})
-console.log("object entries columnsFromBackEnd", Object.entries(columnsFromBackEnd))
+console.log("object entries columnsFromBackEnd", Object.entries(columnsFromBackEnd)) */
 
 const onDragEnd = (result, columns, setColumns) => {
   const {destination, source} = result
