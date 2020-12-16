@@ -38,6 +38,8 @@ const Menu = () => {
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/drag-and-drop-play2">Drag and Drop Play 2</Link>
+              </li><li className="nav-item">
+                <Link className="nav-link" to="/routines-dnd">Routines DnD</Link>
               </li>
               <li className={`${isActivePath()} nav-item dropdown`}>
                 <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

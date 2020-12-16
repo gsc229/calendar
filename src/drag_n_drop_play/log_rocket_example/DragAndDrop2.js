@@ -14,23 +14,19 @@ const itemsFromBackend2 = [
   {id: uuid(), content: 'Fourth task'}
 ]
 
-const columnsFromBackEnd = [
-    {
-      
+const columnsFromBackEnd = 
+  {
+    [uuid()]:{
       id: uuid(),
       name: 'Monday',
       items: itemsFromBackend
-    
-  },
-    {
-      
+    },
+    [uuid()]:{
       id: uuid(), 
       name: 'Tuesday',
       items: itemsFromBackend2
-    
+    }
   }
-  ]
-  
 
 console.log({columnsFromBackEnd})
 console.log("object entries columnsFromBackEnd", Object.entries(columnsFromBackEnd))
@@ -86,7 +82,7 @@ const onDragEnd = (result, columns, setColumns) => {
 }
 
 
-const DragAndDrop2 = ({routines}) => {
+const DragAndDrop2 = () => {
 
   const [columns, setColumns] = useState(columnsFromBackEnd)
   console.log({columns}, {objeEntries: Object.entries(columns)})
@@ -96,12 +92,12 @@ const DragAndDrop2 = ({routines}) => {
       <DragDropContext
         onDragEnd={result=> onDragEnd(result, columns, setColumns)}
       >
-        {columns.map((column) => {
+        {Object.entries(columns).map(([id, column]) => {
           
           return(
             <Droppable
-              key={column.id}
-              droppableId={column.id}
+              key={id}
+              droppableId={id}
             >
               {(provided, snapshot) => {
                 return (

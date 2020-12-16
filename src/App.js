@@ -13,20 +13,24 @@ import Progress from './progress/Progress'
 
 import DragAndDropPlay from './drag_n_drop_play/DragAndDropPlay'
 import DragAndDrop2 from './drag_n_drop_play/log_rocket_example/DragAndDrop2'
+import RoutinesDND from './drag_n_drop_play/routines_dnd/RoutinesWeekDnD'
+import {getWeek} from './drag_n_drop_play/helpers/routineWeekHelpers'
+
 
 function App() {
   
-  const [routines, setRoutines] = useState([{}])
+  const testWeekId = '5fd6eb71b0321644dc6bf08a'
+  const testWeekQueryStr = 'populate_one=exercises&populate_two=exercise'
+  const [weekData, setWeekData] = useState()
   
   useEffect(()=>{
-    axiosWithAuth()
-    .get('/routines?populate_one=weeks&populate_two=exercises&populate_three=exercise')
-    .then(res=>{
-      console.log({res})
-      setRoutines(res.data.data)
-    })
-    .catch(err=>{
-      console.log({err})
+    getWeek(testWeekId, testWeekQueryStr)
+    .then(response => {
+      if(response.success){
+        setWeekData(response.data)
+      } else{
+        console.log({response})
+      }
     })
   }, [])
 
@@ -66,13 +70,16 @@ function App() {
           <DragAndDropPlay/>
         </Route>
         <Route exact path="/drag-and-drop-play2">
-          <DragAndDrop2 routines={routines}/>
+          <DragAndDrop2 />
+        </Route>
+        <Route exact path="/routines-dnd">
+          <RoutinesDND weekData={weekData} setWeekData={setWeekData}/>
         </Route>
         
       </Switch>
       <div style={{padding: '20px'}}>
         
-        <pre>{JSON.stringify(routines, '' ,4)}</pre>
+        <pre>{JSON.stringify(weekData, '' ,4)}</pre>
       </div>
     </div>
   );
